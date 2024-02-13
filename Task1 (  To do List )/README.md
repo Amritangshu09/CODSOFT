@@ -1,4 +1,5 @@
 To-Do List App
+
 This is a simple To-Do List application built using Python's Tkinter library. It allows users to add tasks, delete tasks, and clear all tasks from the list.
 
 Features
