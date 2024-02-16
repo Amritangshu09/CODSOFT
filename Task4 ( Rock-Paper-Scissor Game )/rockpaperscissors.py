@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from random import randint
+from tkinter import messagebox
 
 window = Tk()
 #window.geometry('900x350')
@@ -38,17 +39,27 @@ def computer_update():
     final+=1
     computer_score["text"]=str(final)
     if final == 10:
-        updateMessage("Computer Wins the Game!")
-
+        choice = messagebox.askquestion("Game Over", "Computer Wins the Game! Do you want to play again?")
+        if choice == 'yes':
+            computer_score["text"]=0
+            player_score["text"]=0
+            final_message['text'] = ""
+        else:
+            window.destroy()
 
 def player_update():
     final = int (player_score['text'])
     final+=1
     player_score["text"]=str(final)
     if final == 10:
-        updateMessage("Player Wins the Game!")
+        choice = messagebox.askquestion("Game Over", "Player Wins the Game! Do you want to play again?")
+        if choice == 'yes':
+            computer_score["text"]=0
+            player_score["text"]=0
+            final_message['text'] = ""
+        else:
+            window.destroy()
 
-    
 def winner_check(p,c):
     if p == c:
         updateMessage("It's a Tie")
@@ -95,14 +106,11 @@ def choice_update(a):
     
     winner_check(a,choice_computer)
 
-
 final_message =  Label(window,font=("Cascadia Mono",30,"bold"),bg="sky blue",fg="indigo")
 final_message.grid(row=3,column=2)
 
 button_rock = Button(window,width=8,height=2,text="ROCK",font=("Arial",20,"bold"),bg="Yellow",fg="red",padx=5,pady=5,activebackground="brown",activeforeground="yellow",highlightthickness=2,highlightcolor="white",highlightbackground="green",cursor="hand1",command= lambda:choice_update("rock")).grid(row=2,column=1)
 button_paper = Button(window,width=8,height=2,text="PAPER",font=("Arial",20,"bold"),bg="brown",fg="Yellow",padx=5,pady=5,activebackground="yellow",activeforeground="red",highlightthickness=2,highlightcolor="white",highlightbackground="green",cursor="hand1",command= lambda:choice_update("paper")).grid(row=2,column=2)
 button_scissor = Button(window,width=8,height=2,text="SCISSOR",font=("Arial",20,"bold"),bg="Yellow",fg="red",padx=5,pady=5,activebackground="brown",activeforeground="yellow",highlightthickness=2,highlightcolor="white",highlightbackground="green",cursor="hand1",command= lambda:choice_update("scissor")).grid(row=2,column=3)
-
-
 
 window.mainloop()
